@@ -1,0 +1,37 @@
+{
+    "name": "WebSocket Blocker",
+    "description": "This extension closes any WebSocket connection immediately after it's been opened.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+        "storage"
+    ],
+    "action": {
+        "default_title": "WebSocket Blocker",
+        "default_popup": "popup.html"
+    },
+    "web_accessible_resources": [{
+        "resources": [
+            "assets/js/WebSocketProxy.js"
+        ],
+        "matches": [
+            "https://*/*",
+            "http://*/*",
+            "file://*/*"
+        ]
+    }],
+    "background": {
+        "service_worker": "assets/js/background.js"
+    },
+    "content_scripts": [{
+        "matches": [
+            "http://*/*",
+            "https://*/*",
+            "file://*/*"
+        ],
+        "js": [
+            "assets/js/script.js"
+        ],
+        "run_at": "document_start"
+    }]
+}
